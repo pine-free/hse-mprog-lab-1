@@ -1,0 +1,5 @@
+-std=c++23
+-Wall
+-I/opt/homebrew/opt/boost/include
+-I/opt/homebrew/include
+-L/opt/homebrew/lib
