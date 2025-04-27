@@ -2,6 +2,7 @@
 #include <iostream>
 #include <istream>
 #include <string>
+#include <vector>
 
 struct Passenger {
   time_t flight_date;
@@ -24,10 +25,36 @@ struct Passenger {
     return !(lhs < rhs);
   }
 
-  friend std::istream& operator>>(std::istream& is, Passenger& p) {
+  friend std::istream &operator>>(std::istream &is, Passenger &p) {
     is >> p.flight_date >> p.flight_num >> p.name >> p.seat_num;
     return is;
   }
 };
 
-int main() { return 0; }
+template <class T> class Sort {
+public:
+  static void sort(std::vector<T> &vec);
+};
+
+template <class T> class BubbleSort : Sort<T> {
+public:
+  static void sort(std::vector<T> &vec) {
+    for (int i = 0; i < vec.size(); ++i) {
+      for (int j = vec.size() - 1; j > i; --j) {
+        if (vec[j - 1] > vec[j]) {
+          std::swap(vec[j - 1], vec[j]);
+        }
+      }
+    }
+  }
+};
+
+int main() {
+  auto nums = std::vector({1, 10, 4, 2, 1, 3, 4, 5, 3, 2, 1});
+  BubbleSort<int>::sort(nums);
+  for (auto v: nums) {
+    std::cout << v << " ";
+  }
+  std::cout << "\n";
+  return 0;
+}
