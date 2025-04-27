@@ -4,10 +4,9 @@
 #include <istream>
 #include <string>
 #include <vector>
-#include <fstream>
 
 struct Passenger {
-  time_t flight_date;
+  std::string flight_date;
   int flight_num;
   std::string name;
   int seat_num;
@@ -30,6 +29,12 @@ struct Passenger {
   friend std::istream &operator>>(std::istream &is, Passenger &p) {
     is >> p.flight_date >> p.flight_num >> p.name >> p.seat_num;
     return is;
+  }
+
+  friend std::ostream &operator<<(std::ostream &os, const Passenger &p) {
+    os << p.flight_date << " " << p.flight_num << " " << p.name << " "
+       << p.seat_num;
+    return os;
   }
 };
 
@@ -151,25 +156,35 @@ public:
   }
 };
 
-template<class T> class FileReader {
-  static std::vector<T> read(std::istream& is) {
+template <class T> class FileReader {
+public:
+  static std::vector<T> read(std::istream &is, int size) {
     auto res = std::vector<T>();
-    while (!is.eof()) {
+    for (int i = 0; i < size; ++i) {
       T el;
       is >> el;
       res.push_back(el);
     }
-
     return res;
   }
 };
 
 int main() {
-  auto nums = std::vector({1, 10, 4, 2, 1, 3, 4, 5, 3, 2, 1});
-  HeapSort<int>::sort(nums);
-  for (auto v : nums) {
-    std::cout << v << " ";
+  std::fstream passengers_file("data/test_passengers.txt");
+  auto res = FileReader<Passenger>::read(passengers_file, 4);
+  for (auto sort_func :
+       {BubbleSort<Passenger>::sort, InsertionSort<Passenger>::sort,
+        HeapSort<Passenger>::sort}) {
+    auto new_vec = std::vector<Passenger>(res.size());
+    for (int i = 0; i < res.size(); ++i) {
+      new_vec[i] = res[i];
+    }
+
+    sort_func(new_vec);
+    for (auto p : new_vec) {
+      std::cout << p << "\n";
+    }
+    std::cout << "======\n";
   }
-  std::cout << "\n";
   return 0;
 }
