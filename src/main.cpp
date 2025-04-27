@@ -1,8 +1,10 @@
 #include <ctime>
+#include <fstream>
 #include <iostream>
 #include <istream>
 #include <string>
 #include <vector>
+#include <fstream>
 
 struct Passenger {
   time_t flight_date;
@@ -146,6 +148,19 @@ public:
       std::swap(vec[i], vec[0]);
       buildHeap(vec, 0, i - 1);
     }
+  }
+};
+
+template<class T> class FileReader {
+  static std::vector<T> read(std::istream& is) {
+    auto res = std::vector<T>();
+    while (!is.eof()) {
+      T el;
+      is >> el;
+      res.push_back(el);
+    }
+
+    return res;
   }
 };
 
