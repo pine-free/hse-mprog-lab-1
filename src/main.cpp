@@ -49,10 +49,29 @@ public:
   }
 };
 
+template <class T> class InsertionSort : Sort<T> {
+public:
+  static void sort(std::vector<T> &vec) {
+    int j = 0;
+    T val;
+    for (int i = 0; i < vec.size(); ++i) {
+      // NOTE: Здесь важно именно присваивать, а не просто брать из массива,
+      // иначе всё ломается на этапе сдвига
+      val = vec[i];
+      for (j = i-1; j >= 0 && vec[j] > val; --j) {
+        // "Сдвигаем" элементы направо, освободжая "свободное место" под вставляемый
+        vec[j + 1] = vec[j];
+      }
+      vec[j + 1] = val;
+    }
+  }
+};
+
+
 int main() {
   auto nums = std::vector({1, 10, 4, 2, 1, 3, 4, 5, 3, 2, 1});
-  BubbleSort<int>::sort(nums);
-  for (auto v: nums) {
+  InsertionSort<int>::sort(nums);
+  for (auto v : nums) {
     std::cout << v << " ";
   }
   std::cout << "\n";
