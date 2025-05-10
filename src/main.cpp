@@ -121,9 +121,6 @@ template <class T> class HeapSort : Sort<T> {
   */
 private:
   static void buildHeap(std::vector<T> &vec, int root_idx, int pyramid_size) {
-    /*
-    Построение пирамиды
-    */
     T new_elem = vec[root_idx];
     int child_idx;
     while (root_idx <= pyramid_size / 2) {
