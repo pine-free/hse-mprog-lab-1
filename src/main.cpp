@@ -27,12 +27,12 @@ struct Passenger {
   }
 
   friend std::istream &operator>>(std::istream &is, Passenger &p) {
-    is >> p.flight_date >> p.flight_num >> p.name >> p.seat_num;
+    is >> p.flight_num >> p.flight_date >> p.name >> p.seat_num;
     return is;
   }
 
   friend std::ostream &operator<<(std::ostream &os, const Passenger &p) {
-    os << p.flight_date << " " << p.flight_num << " " << p.name << " "
+    os << p.flight_num << " " << p.flight_date << " " << p.name << " "
        << p.seat_num;
     return os;
   }
