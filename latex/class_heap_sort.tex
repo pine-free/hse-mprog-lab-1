@@ -1,0 +1,59 @@
+\doxysection{Heap\+Sort\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_heap_sort}{}\label{class_heap_sort}\index{HeapSort$<$ T $>$@{HeapSort$<$ T $>$}}
+Inheritance diagram for Heap\+Sort\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_heap_sort}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_heap_sort_aa82a75ce4f1f9253d8da0032189e2d72}\label{class_heap_sort_aa82a75ce4f1f9253d8da0032189e2d72} 
+static void {\bfseries sort} (std\+::vector$<$ T $>$ \&vec)
+\item 
+\Hypertarget{class_heap_sort_ab138dbc6890695f42f59560d19de649a}\label{class_heap_sort_ab138dbc6890695f42f59560d19de649a} 
+static std\+::string {\bfseries classname} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_sort}{Sort$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries sort} (std\+::vector$<$ T $>$ \&vec)
+\item 
+static std\+::string {\bfseries classname} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Heap\+Sort$<$ T $>$}
+Пирамиду (кучу) определяем как бинарное дерево высоты k, где\+:
+\begin{DoxyItemize}
+\item Все вершины имеют глубину k или k -\/ 1 (сбалансированное)
+\item Уровень k -\/ 1 заполнен целиком, а уровень k -- слева направо
+\item Каждый элемент меньше или равен родителю
+\end{DoxyItemize}
+
+Сортировка производится в 2 фазы\+:
+\begin{DoxyEnumerate}
+\item Построение пирамиды
+\item Сама сортировка
+\end{DoxyEnumerate}
+
+Построение пирамиды производится следующим образом\+:
+
+Хранить пирамиду предлагается в массиве. Для любого элемента с индексом i его детьми будут элементы с индексами 2i + 1 и 2i + 2
+
+Строить пирамиду предлагается "{}расширением"{}\+:
+
+Если на индексах vec\mbox{[}i+1\mbox{]} .. vec\mbox{[}n\mbox{]} хранится пирамида, то мы можем расширить её до индекса vec\mbox{[}i\mbox{]} следующим образом\+:
+\begin{DoxyEnumerate}
+\item Выбираем наибольшего ребенка из vec\mbox{[}2i+1\mbox{]}, vec\mbox{[}2i+2\mbox{]}
+\item Если наибольший ребенок больше vec\mbox{[}i\mbox{]} -- меняем их местами и повторяем процедуру, иначе останавливаем процедуру
+\end{DoxyEnumerate}
+
+Когда пирамида была построена, остаётся всего лишь взять первый элемент массива (самый верхний в пирамиде), поменять местами с нижним (самым последним) и повторить процесс построения пирамиды, "{}забыв"{} о последнем (теперь самом большом) элементе 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{main_8cpp}{main.\+cpp}}\end{DoxyCompactItemize}
